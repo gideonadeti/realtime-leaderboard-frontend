@@ -5,6 +5,7 @@ import Header from "./components/header";
 import QCProvider from "./components/q-c-provider";
 import { ThemeProvider } from "./components/theme-provider";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/sonner";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -23,6 +24,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           </div>
         </SidebarProvider>
       </QCProvider>
+      <Toaster />
     </ThemeProvider>
   );
 };
