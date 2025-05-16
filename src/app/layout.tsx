@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider, SignIn, SignedIn, SignedOut } from "@clerk/nextjs";
 
 import "./globals.css";
+import { ThemeProvider } from "./(main)/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,27 +21,33 @@ export const metadata: Metadata = {
   description: "Frontend for the real-time leaderboard project",
 };
 
-const Layout = ({
-  children,
-}: {
-  children: React.ReactNode
-}) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ClerkProvider>
-          <SignedIn>{children}</SignedIn>
-          <SignedOut>
-            <div className="h-screen flex items-center justify-center">
-              <SignIn />
-            </div>
-          </SignedOut>
-        </ClerkProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ClerkProvider>
+            <SignedIn>
+              {children}
+              <Toaster />
+            </SignedIn>
+            <SignedOut>
+              <div className="h-screen flex items-center justify-center">
+                <SignIn />
+              </div>
+            </SignedOut>
+          </ClerkProvider>
+        </ThemeProvider>
       </body>
     </html>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
