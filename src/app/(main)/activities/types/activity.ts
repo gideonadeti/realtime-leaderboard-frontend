@@ -7,4 +7,10 @@ export interface Activity {
 export interface Score {
   id: string;
   value: number;
+  user: User;
+}
+
+export interface User {
+  id: string;
+  name: string;
 }
