@@ -2,17 +2,19 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ClipboardList, Globe } from "lucide-react";
 
+import { ThemeToggler } from "./theme-toggler";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { ClipboardList, Globe } from "lucide-react";
 
 interface MenuItem {
   href: string;
@@ -59,6 +61,11 @@ const AppSidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <SidebarGroup>
+          <ThemeToggler />
+        </SidebarGroup>
+      </SidebarFooter>
     </Sidebar>
   );
 };
