@@ -16,8 +16,8 @@ const useActivities = () => {
   useEffect(() => {
     if (activitiesQuery.status === "error") {
       const errorMessage =
-        (activitiesQuery.error?.response?.data as { message: string })
-          ?.message || "Something went wrong";
+        (activitiesQuery.error?.response?.data as Error)?.message ||
+        "Something went wrong";
 
       toast.error(errorMessage);
     }
