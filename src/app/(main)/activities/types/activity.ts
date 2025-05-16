@@ -6,6 +6,5 @@ export interface Activity {
 
 export interface Score {
   id: string;
-  name: string;
   value: number;
 }
