@@ -6,6 +6,8 @@ import { useParams, useRouter } from "next/navigation";
 
 import useActivities from "../hooks/use-activities";
 import Loading from "@/app/loading";
+import columns from "./components/data-table/columns";
+import ScoresTable from "./components/data-table/table";
 import { Button } from "@/components/ui/button";
 import { H3 } from "@/components/ui/typography";
 
@@ -33,6 +35,7 @@ const Page = () => {
           Leaderboard
         </Link>
       </div>
+      <ScoresTable columns={columns} data={activity?.scores || []} />
     </div>
   );
 };
