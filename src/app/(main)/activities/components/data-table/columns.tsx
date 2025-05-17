@@ -14,7 +14,7 @@ const columns: ColumnDef<Activity>[] = [
       const activity = row.original as Activity;
 
       return (
-        <CustomLink href={`/activities/${activity.id}`}>
+        <CustomLink href={`/activities/${activity.id}`} className="capitalize">
           {activity.name}
         </CustomLink>
       );
