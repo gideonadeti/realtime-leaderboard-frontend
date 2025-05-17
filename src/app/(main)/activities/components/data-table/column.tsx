@@ -16,7 +16,7 @@ const columns: ColumnDef<Activity>[] = [
       return (
         <Link
           href={`/activities/${activity.id}`}
-          className="hover:underline hover:text-blue-700"
+          className="hover:underline hover:text-blue-700 ms-2"
         >
           {activity.name}
         </Link>
