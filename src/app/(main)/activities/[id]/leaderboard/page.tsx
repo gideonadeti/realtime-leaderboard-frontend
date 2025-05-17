@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-import useActivities from "../../activities/hooks/use-activities";
+import useActivities from "../../hooks/use-activities";
 import useLeaderboard from "./hooks/use-leaderboard";
 import Loading from "@/app/loading";
 import { Button } from "@/components/ui/button";
