@@ -9,6 +9,7 @@ export interface Score {
   value: number;
   user: User;
   activityId: string;
+  createdAt: Date;
 }
 
 export interface User {

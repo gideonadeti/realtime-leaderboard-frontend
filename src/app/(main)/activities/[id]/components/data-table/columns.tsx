@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 
 import Header from "@/app/(main)/components/data-table/header";
+import formatDate from "@/app/(main)/utils/format-date";
 import { Score } from "../../../types/activity";
 
 const columns: ColumnDef<Score>[] = [
@@ -22,6 +23,17 @@ const columns: ColumnDef<Score>[] = [
       const score = row.original as Score;
 
       return <span className="ms-6">{score.value}</span>;
+    },
+  },
+  {
+    accessorKey: "createdAt",
+    header: ({ column }) => (
+      <Header column={column} title="Date of submission" />
+    ),
+    cell: ({ row }) => {
+      const score = row.original as Score;
+
+      return <span>{formatDate(score.createdAt)}</span>;
     },
   },
 ];
