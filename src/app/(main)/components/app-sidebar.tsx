@@ -7,12 +7,14 @@ import { ClipboardList, Globe } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
 
 interface MenuItem {
   href: string;
@@ -56,6 +58,11 @@ const AppSidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <SidebarGroup>
+          <Button variant="outline">Submit Score</Button>
+        </SidebarGroup>
+      </SidebarFooter>
     </Sidebar>
   );
 };
