@@ -12,12 +12,17 @@ const columns: ColumnDef<Score>[] = [
     cell: ({ row }) => {
       const score = row.original as Score;
 
-      return <span>{score.user.name}</span>;
+      return <span className="ms-6">{score.user.name}</span>;
     },
   },
   {
     accessorKey: "value",
     header: ({ column }) => <Header column={column} title="Score" />,
+    cell: ({ row }) => {
+      const score = row.original as Score;
+
+      return <span className="ms-6">{score.value}</span>;
+    },
   },
 ];
 
