@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
@@ -10,6 +9,7 @@ import columns from "./components/data-table/columns";
 import ScoresTable from "./components/data-table/table";
 import { Button } from "@/components/ui/button";
 import { H3 } from "@/components/ui/typography";
+import CustomLink from "../../components/custom-link";
 
 const Page = () => {
   const router = useRouter();
@@ -28,12 +28,9 @@ const Page = () => {
       </Button>
       <div className="flex items-center justify-between">
         <H3>{`${activity?.name}'s scores`}</H3>
-        <Link
-          href={`/leaderboards/${activity?.id}`}
-          className="hover:underline hover:text-blue-700"
-        >
+        <CustomLink href={`/leaderboards/${activity?.id}`}>
           Leaderboard
-        </Link>
+        </CustomLink>
       </div>
       <ScoresTable columns={columns} data={activity?.scores || []} />
     </div>

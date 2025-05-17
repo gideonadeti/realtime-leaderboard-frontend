@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { ColumnDef } from "@tanstack/react-table";
 
 import Header from "@/app/(main)/components/data-table/header";
 import { Activity } from "../../types/activity";
+import CustomLink from "@/app/(main)/components/custom-link";
 
 const columns: ColumnDef<Activity>[] = [
   {
@@ -14,12 +14,9 @@ const columns: ColumnDef<Activity>[] = [
       const activity = row.original as Activity;
 
       return (
-        <Link
-          href={`/activities/${activity.id}`}
-          className="hover:underline hover:text-blue-700 ms-2"
-        >
+        <CustomLink href={`/activities/${activity.id}`}>
           {activity.name}
-        </Link>
+        </CustomLink>
       );
     },
   },
