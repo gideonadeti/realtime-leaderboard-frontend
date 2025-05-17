@@ -6,6 +6,8 @@ import { toast } from "sonner";
 
 import useActivities from "../../hooks/use-activities";
 import useLeaderboard from "./hooks/use-leaderboard";
+import columns from "./components/data-table/columns";
+import LeaderboardTable from "./components/data-table/table";
 import Loading from "@/app/loading";
 import { Button } from "@/components/ui/button";
 import { H3 } from "@/components/ui/typography";
@@ -44,14 +46,7 @@ const Page = () => {
         <ArrowLeft />
       </Button>
       <H3>{`${activityName} leaderboard`}</H3>
-      <div>
-        {users.map(({ id, name, score }) => (
-          <div key={id} className="flex items-center justify-between">
-            <p>{name}</p>
-            <p>{score}</p>
-          </div>
-        ))}
-      </div>
+      <LeaderboardTable columns={columns} data={users} />
     </div>
   );
 };
