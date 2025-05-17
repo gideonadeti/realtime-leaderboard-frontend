@@ -45,7 +45,7 @@ const Page = () => {
       <Button size="sm" title="Back" onClick={() => router.back()}>
         <ArrowLeft />
       </Button>
-      <H3>{`${activityName} leaderboard`}</H3>
+      <H3 className="capitalize">{`${activityName} leaderboard`}</H3>
       <LeaderboardTable columns={columns} data={users} />
     </div>
   );

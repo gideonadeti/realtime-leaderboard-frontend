@@ -41,7 +41,7 @@ const Page = () => {
         <ArrowLeft />
       </Button>
       <div className="flex items-center justify-between">
-        <H3>{`${activity?.name} scores`}</H3>
+        <H3 className="capitalize">{`${activity?.name} scores`}</H3>
         <CustomLink href={`/activities/${activity?.id}/leaderboard`}>
           Leaderboard
         </CustomLink>
