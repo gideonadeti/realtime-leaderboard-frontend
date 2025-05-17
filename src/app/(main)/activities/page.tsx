@@ -1,7 +1,7 @@
 "use client";
 
 import useActivities from "./hooks/use-activities";
-import columns from "./components/data-table/column";
+import columns from "./components/data-table/columns";
 import ActivitiesTable from "./components/data-table/table";
 import Loading from "@/app/loading";
 import { H3 } from "@/components/ui/typography";
