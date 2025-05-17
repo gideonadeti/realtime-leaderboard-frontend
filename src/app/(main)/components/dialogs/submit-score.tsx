@@ -4,6 +4,7 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import useActivities from "../../activities/hooks/use-activities";
+import useScores from "../../hooks/use-scores";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Input } from "@/components/ui/input";
@@ -53,6 +54,7 @@ const formSchema = z.object({
 
 const SubmitScore = ({ open, onOpenChange }: SubmitScoreProps) => {
   const { activitiesQuery } = useActivities();
+  const { createScoreMutation } = useScores();
   const activities = activitiesQuery.data || [];
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -62,7 +64,7 @@ const SubmitScore = ({ open, onOpenChange }: SubmitScoreProps) => {
     : null;
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    createScoreMutation.mutate({ ...values, form, onOpenChange });
   };
 
   return (
@@ -157,8 +159,14 @@ const SubmitScore = ({ open, onOpenChange }: SubmitScoreProps) => {
                   </FormItem>
                 )}
               />
-              <Button variant="outline" type="submit">
-                Submit
+              <Button
+                variant="outline"
+                type="submit"
+                disabled={
+                  !form.formState.isValid || createScoreMutation.isPending
+                }
+              >
+                {createScoreMutation.isPending ? "Submitting..." : "Submit"}
               </Button>
             </form>
           </Form>
