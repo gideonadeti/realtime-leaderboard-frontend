@@ -2,14 +2,15 @@
 
 import { ArrowLeft } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 import useActivities from "../hooks/use-activities";
-import Loading from "@/app/loading";
 import columns from "./components/data-table/columns";
 import ScoresTable from "./components/data-table/table";
+import CustomLink from "../../components/custom-link";
+import Loading from "@/app/loading";
 import { Button } from "@/components/ui/button";
 import { H3 } from "@/components/ui/typography";
-import CustomLink from "../../components/custom-link";
 
 const Page = () => {
   const router = useRouter();
@@ -19,6 +20,19 @@ const Page = () => {
 
   if (activitiesQuery.isPending) {
     return <Loading />;
+  }
+
+  if (!activity) {
+    toast.error(
+      <div>
+        <p>{`Invalid activity id: ${id}`}</p>
+        <Button variant="link" className="ps-0" onClick={() => router.back()}>
+          Back
+        </Button>
+      </div>
+    );
+
+    return null;
   }
 
   return (
