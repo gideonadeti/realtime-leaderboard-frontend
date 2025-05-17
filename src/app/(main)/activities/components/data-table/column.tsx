@@ -31,7 +31,7 @@ const columns: ColumnDef<Activity>[] = [
     cell: ({ row }) => {
       const activity = row.original as Activity;
 
-      return <div className="ms-20">{activity.scores.length}</div>;
+      return <span className="ms-20">{activity.scores.length}</span>;
     },
   },
 ];
