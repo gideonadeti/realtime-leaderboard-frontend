@@ -14,14 +14,11 @@ const useLeaderboard = (activityId: string) => {
 
   // Error handling effect
   useEffect(() => {
-    if (leaderboardQuery.status === "error") {
-      const errorMessage =
-        (leaderboardQuery.error?.response?.data as Error)?.message ||
-        "Something went wrong";
-
-      toast.error(errorMessage);
+    if (leaderboardQuery.isError) {
+      console.error("Error from `useLeaderboard`:", leaderboardQuery.error);
+      toast.error("Failed to fetch leaderboard");
     }
-  }, [leaderboardQuery.error?.response?.data, leaderboardQuery.status]);
+  }, [leaderboardQuery.isError, leaderboardQuery.error]);
 
   return {
     leaderboardQuery,

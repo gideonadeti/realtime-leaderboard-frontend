@@ -14,14 +14,11 @@ const useActivities = () => {
 
   // Error handling effect
   useEffect(() => {
-    if (activitiesQuery.status === "error") {
-      const errorMessage =
-        (activitiesQuery.error?.response?.data as Error)?.message ||
-        "Something went wrong";
-
-      toast.error(errorMessage);
+    if (activitiesQuery.isError) {
+      console.error("Error from `useActivities`:", activitiesQuery.error);
+      toast.error("Failed to fetch activities");
     }
-  }, [activitiesQuery.error?.response?.data, activitiesQuery.status]);
+  }, [activitiesQuery.isError, activitiesQuery.error]);
 
   return {
     activitiesQuery,
