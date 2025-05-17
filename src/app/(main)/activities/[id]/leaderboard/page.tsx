@@ -23,7 +23,7 @@ const Page = () => {
       : activitiesQuery.data?.find((a) => a.id === id)?.name;
   const users = leaderboardQuery.data || [];
 
-  if (activitiesQuery.isPending) {
+  if (activitiesQuery.isPending || leaderboardQuery.isPending) {
     return <Loading />;
   }
 
