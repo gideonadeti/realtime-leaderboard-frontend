@@ -4,13 +4,10 @@ import { AxiosError } from "axios";
 import { useEffect } from "react";
 
 import { fetchLeaderboard } from "../utils/query-functions";
-import { User } from "@/app/(main)/activities/types/activity";
+import { LeaderboardUser } from "../types/leaderboard-user";
 
 const useLeaderboard = (activityId: string) => {
-  const leaderboardQuery = useQuery<
-    (User & { score: number; rank: number })[],
-    AxiosError
-  >({
+  const leaderboardQuery = useQuery<LeaderboardUser[], AxiosError>({
     queryKey: ["activities", activityId, "leaderboard"],
     queryFn: () => fetchLeaderboard(activityId),
   });
