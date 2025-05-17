@@ -17,10 +17,10 @@ const Toolbar = <TData,>({ table }: ToolbarProps<TData>) => {
         <Input
           placeholder="Search user..."
           value={
-            (table.getColumn("user.name")?.getFilterValue() as string) ?? ""
+            (table.getColumn("user_name")?.getFilterValue() as string) ?? ""
           }
           onChange={(event) =>
-            table.getColumn("user.name")?.setFilterValue(event.target.value)
+            table.getColumn("user_name")?.setFilterValue(event.target.value)
           }
           className="h-8 w-[150px] lg:w-[250px]"
         />

@@ -7,7 +7,7 @@ import { Score } from "../../../types/activity";
 
 const columns: ColumnDef<Score>[] = [
   {
-    accessorKey: "user",
+    accessorKey: "user.name",
     header: ({ column }) => <Header column={column} title="User's name" />,
     cell: ({ row }) => {
       const score = row.original as Score;
