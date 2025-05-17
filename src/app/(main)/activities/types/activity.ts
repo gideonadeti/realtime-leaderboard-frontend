@@ -8,6 +8,7 @@ export interface Score {
   id: string;
   value: number;
   user: User;
+  activityId: string;
 }
 
 export interface User {
