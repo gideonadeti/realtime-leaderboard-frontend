@@ -7,7 +7,10 @@ import { fetchLeaderboard } from "../utils/query-functions";
 import { User } from "@/app/(main)/activities/types/activity";
 
 const useLeaderboard = (activityId: string) => {
-  const leaderboardQuery = useQuery<(User & { score: number })[], AxiosError>({
+  const leaderboardQuery = useQuery<
+    (User & { score: number; rank: number })[],
+    AxiosError
+  >({
     queryKey: ["activities", activityId, "leaderboard"],
     queryFn: () => fetchLeaderboard(activityId),
   });
