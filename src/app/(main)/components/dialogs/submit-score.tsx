@@ -1,11 +1,18 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
+import { Check, ChevronsUpDown } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import useActivities from "../../activities/hooks/use-activities";
+import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   Dialog,
   DialogContent,
@@ -14,13 +21,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
   Form,
   FormControl,
   FormField,
@@ -28,6 +28,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 
 interface SubmitScoreProps {
   open: boolean;
@@ -46,10 +54,12 @@ const formSchema = z.object({
 const SubmitScore = ({ open, onOpenChange }: SubmitScoreProps) => {
   const { activitiesQuery } = useActivities();
   const activities = activitiesQuery.data || [];
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
+  const selectedActivity = form.watch("activityId")
+    ? activities.find((activity) => activity.id === form.watch("activityId"))
+    : null;
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log(values);
@@ -73,29 +83,59 @@ const SubmitScore = ({ open, onOpenChange }: SubmitScoreProps) => {
                 control={form.control}
                 name="activityId"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="flex flex-col">
                     <FormLabel>Activity</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Select an activity" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {activities.map((activity) => (
-                          <SelectItem
-                            key={activity.id}
-                            value={activity.id}
-                            className="capitalize"
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant="outline"
+                            role="combobox"
+                            className={cn(
+                              "justify-between",
+                              !field.value && "text-muted-foreground"
+                            )}
                           >
-                            {activity.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                            {field.value
+                              ? selectedActivity?.name || "Select activity"
+                              : "Select activity"}
+                            <ChevronsUpDown className="opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="p-0">
+                        <Command>
+                          <CommandInput
+                            placeholder="Search activity..."
+                            className="h-9"
+                          />
+                          <CommandList>
+                            <CommandEmpty>No activity found.</CommandEmpty>
+                            <CommandGroup>
+                              {activities.map((activity) => (
+                                <CommandItem
+                                  value={activity.name}
+                                  key={activity.id}
+                                  onSelect={() => {
+                                    form.setValue("activityId", activity.id);
+                                  }}
+                                >
+                                  {activity.name}
+                                  <Check
+                                    className={cn(
+                                      "ml-auto",
+                                      activity.id === field.value
+                                        ? "opacity-100"
+                                        : "opacity-0"
+                                    )}
+                                  />
+                                </CommandItem>
+                              ))}
+                            </CommandGroup>
+                          </CommandList>
+                        </Command>
+                      </PopoverContent>
+                    </Popover>
                     <FormMessage />
                   </FormItem>
                 )}
