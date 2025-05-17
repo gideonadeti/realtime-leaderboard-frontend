@@ -29,7 +29,7 @@ const menuItems: MenuItem[] = [
     label: "Activities",
   },
   {
-    href: "/leaderboards/global",
+    href: "/activities/global/leaderboard",
     icon: <Globe />,
     label: "Global Leaderboard",
   },
@@ -46,10 +46,7 @@ const AppSidebar = () => {
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={pathname.includes(item.href)}
-                  >
+                  <SidebarMenuButton asChild isActive={pathname === item.href}>
                     <Link href={item.href}>
                       {item.icon}
                       <span>{item.label}</span>

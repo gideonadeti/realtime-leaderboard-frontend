@@ -42,7 +42,7 @@ const Page = () => {
       </Button>
       <div className="flex items-center justify-between">
         <H3>{`${activity?.name} scores`}</H3>
-        <CustomLink href={`/leaderboards/${activity?.id}`}>
+        <CustomLink href={`/activities/${activity?.id}/leaderboard`}>
           Leaderboard
         </CustomLink>
       </div>
