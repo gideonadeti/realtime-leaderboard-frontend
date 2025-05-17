@@ -36,7 +36,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <ClerkProvider>
             <SignedIn>
               {children}
-              <Toaster />
+              <Toaster richColors />
             </SignedIn>
             <SignedOut>
               <div className="h-screen flex items-center justify-center">
