@@ -6,6 +6,6 @@ export const fetchActivities = async () => {
 
     return response.data;
   } catch (error) {
-    console.error("Error from `readProducts`:", error);
+    console.error("Error from `fetchActivities`:", error);
   }
 };

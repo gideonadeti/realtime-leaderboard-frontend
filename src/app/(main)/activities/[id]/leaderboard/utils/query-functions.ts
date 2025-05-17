@@ -6,6 +6,6 @@ export const fetchLeaderboard = async (activityId: string) => {
 
     return response.data;
   } catch (error) {
-    console.error("Error from `readProducts`:", error);
+    console.error("Error from `fetchLeaderboard`:", error);
   }
 };
