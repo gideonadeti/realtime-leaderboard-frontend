@@ -1,9 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { ClipboardList, Globe } from "lucide-react";
 
+import SubmitScore from "./dialogs/submit-score";
+import { Button } from "@/components/ui/button";
 import {
   Sidebar,
   SidebarContent,
@@ -14,7 +17,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
 
 interface MenuItem {
   href: string;
@@ -37,6 +39,7 @@ const menuItems: MenuItem[] = [
 
 const AppSidebar = () => {
   const pathname = usePathname();
+  const [openSubmitScore, setOpenSubmitScore] = useState(false);
 
   return (
     <Sidebar>
@@ -60,9 +63,12 @@ const AppSidebar = () => {
       </SidebarContent>
       <SidebarFooter>
         <SidebarGroup>
-          <Button variant="outline">Submit Score</Button>
+          <Button variant="outline" onClick={() => setOpenSubmitScore(true)}>
+            Submit Score
+          </Button>
         </SidebarGroup>
       </SidebarFooter>
+      <SubmitScore open={openSubmitScore} onOpenChange={setOpenSubmitScore} />
     </Sidebar>
   );
 };
