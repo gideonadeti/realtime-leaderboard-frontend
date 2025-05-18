@@ -12,7 +12,7 @@ const columns: ColumnDef<LeaderboardUser>[] = [
     cell: ({ row }) => {
       const leaderboardUser = row.original as LeaderboardUser;
 
-      return <span className="ms-6">{leaderboardUser.rank + 1}</span>;
+      return <span className="ms-6">{leaderboardUser.rank}</span>;
     },
   },
   {
