@@ -1,6 +1,10 @@
-import axios from "./axios-instance";
+import { AxiosInstance } from "axios";
 
-export const createScore = async (activityId: string, value: number) => {
+export const createScore = async (
+  axios: AxiosInstance,
+  activityId: string,
+  value: number
+) => {
   try {
     const response = await axios.post("/scores", {
       activityId,

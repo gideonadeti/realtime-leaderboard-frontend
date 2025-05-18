@@ -1,6 +1,6 @@
-import axios from "../../utils/axios-instance";
+import { AxiosInstance } from "axios";
 
-export const fetchActivities = async () => {
+export const fetchActivities = async (axios: AxiosInstance) => {
   try {
     const response = await axios.get("/activities");
 

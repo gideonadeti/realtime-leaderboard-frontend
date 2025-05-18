@@ -2,11 +2,13 @@ import { AxiosError } from "axios";
 import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+import useGetAxios from "./use-get-axios";
 import { Activity, Score } from "../activities/types/activity";
 import { createScore } from "../utils/query-functions";
 import { UseFormReturn } from "react-hook-form";
 
 const useScores = () => {
+  const getAxios = useGetAxios();
   const queryClient = useQueryClient();
   const createScoreMutation = useMutation<
     Score,
@@ -28,8 +30,10 @@ const useScores = () => {
       onOpenChange: (open: boolean) => void;
     }
   >({
-    mutationFn: ({ activityId, value }) => {
-      return createScore(activityId, value);
+    mutationFn: async ({ activityId, value }) => {
+      const axios = await getAxios();
+
+      return createScore(axios, activityId, value);
     },
     onError: (error) => {
       const errorMessage =

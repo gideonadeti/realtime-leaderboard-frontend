@@ -3,13 +3,19 @@ import { toast } from "sonner";
 import { AxiosError } from "axios";
 import { useEffect } from "react";
 
+import useGetAxios from "../../hooks/use-get-axios";
 import { fetchActivities } from "../utils/query-functions";
 import { Activity } from "../types/activity";
 
 const useActivities = () => {
+  const getAxios = useGetAxios();
   const activitiesQuery = useQuery<Activity[], AxiosError>({
     queryKey: ["activities"],
-    queryFn: () => fetchActivities(),
+    queryFn: async () => {
+      const axios = await getAxios();
+
+      return fetchActivities(axios);
+    },
   });
 
   // Error handling effect

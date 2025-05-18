@@ -1,6 +1,9 @@
-import axios from "@/app/(main)/utils/axios-instance";
+import { AxiosInstance } from "axios";
 
-export const fetchLeaderboard = async (activityId: string) => {
+export const fetchLeaderboard = async (
+  axios: AxiosInstance,
+  activityId: string
+) => {
   try {
     const response = await axios.get(`/activities/${activityId}/leaderboard`);
 
