@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useUser } from "@clerk/nextjs";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -15,6 +16,8 @@ import {
 
 import Pagination from "@/app/(main)/components/data-table/pagination";
 import Toolbar from "./toolbar";
+import { LeaderboardUser } from "../../types/leaderboard-user";
+import { cn } from "@/lib/utils";
 import {
   Table,
   TableBody,
@@ -33,9 +36,10 @@ const LeaderboardTable = <TData, TValue>({
   columns,
   data,
 }: LeaderboardTableProps<TData, TValue>) => {
+  const targetRowRef = useRef<HTMLTableRowElement>(null);
+  const { user } = useUser();
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
-
   const table = useReactTable({
     data,
     columns,
@@ -50,6 +54,29 @@ const LeaderboardTable = <TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
   });
+
+  useEffect(() => {
+    const allRows = table.getFilteredRowModel().rows;
+    const targetRowIndex = allRows.findIndex(
+      (row) => (row.original as LeaderboardUser).clerkId === user?.id
+    );
+
+    if (targetRowIndex !== -1) {
+      const pageIndex = Math.floor(
+        targetRowIndex / table.getState().pagination.pageSize
+      );
+      table.setPageIndex(pageIndex);
+
+      setTimeout(() => {
+        if (targetRowRef.current) {
+          targetRowRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        }
+      }, 100);
+    }
+  }, [table, user?.id]);
 
   return (
     <div className="space-y-4">
@@ -80,6 +107,15 @@ const LeaderboardTable = <TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  ref={
+                    (row.original as LeaderboardUser).clerkId === user?.id
+                      ? targetRowRef
+                      : undefined
+                  }
+                  className={cn(
+                    (row.original as LeaderboardUser).clerkId === user?.id &&
+                      "bg-purple-100 dark:bg-purple-900/20 relative after:absolute after:left-0 after:top-0 after:h-full after:w-1 after:bg-purple-600"
+                  )}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

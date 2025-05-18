@@ -42,7 +42,12 @@ const Page = () => {
 
   return (
     <div className="px-8 py-4 space-y-4">
-      <Button size="sm" title="Back" onClick={() => router.back()}>
+      <Button
+        variant="outline"
+        size="sm"
+        title="Back"
+        onClick={() => router.back()}
+      >
         <ArrowLeft />
       </Button>
       <H3>{`${activityName} Leaderboard`}</H3>
