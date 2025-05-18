@@ -2,14 +2,16 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { AxiosError } from "axios";
 import { useEffect } from "react";
+import { Socket } from "socket.io-client";
 
-import socket from "@/app/(main)/libs/socket/socket";
+import useGetSocket from "@/app/(main)/hooks/use-get-socket";
+import useGetAxios from "@/app/(main)/hooks/use-get-axios";
 import { fetchLeaderboard } from "../utils/query-functions";
 import { LeaderboardUser } from "../types/leaderboard-user";
-import useGetAxios from "@/app/(main)/hooks/use-get-axios";
 
 const useLeaderboard = (activityId: string) => {
   const getAxios = useGetAxios();
+  const getSocket = useGetSocket();
   const queryClient = useQueryClient();
   const leaderboardQuery = useQuery<LeaderboardUser[], AxiosError>({
     queryKey: ["activities", activityId, "leaderboard"],
@@ -29,6 +31,8 @@ const useLeaderboard = (activityId: string) => {
   }, [leaderboardQuery.isError, leaderboardQuery.error]);
 
   useEffect(() => {
+    let socket: Socket | null = null;
+
     const handleLeaderboardUpdate = (leaderboard: LeaderboardUser[]) => {
       queryClient.setQueryData(
         ["activities", activityId, "leaderboard"],
@@ -36,15 +40,29 @@ const useLeaderboard = (activityId: string) => {
       );
     };
 
-    socket.on(`activities:${activityId}:leaderboard`, handleLeaderboardUpdate);
+    const setupSocket = async () => {
+      try {
+        socket = await getSocket();
+        socket.on(
+          `activities:${activityId}:leaderboard`,
+          handleLeaderboardUpdate
+        );
+      } catch (err) {
+        console.error("Failed to setup socket", err);
+      }
+    };
+
+    setupSocket();
 
     return () => {
-      socket.off(
-        `activities:${activityId}:leaderboard`,
-        handleLeaderboardUpdate
-      );
+      if (socket) {
+        socket.off(
+          `activities:${activityId}:leaderboard`,
+          handleLeaderboardUpdate
+        );
+      }
     };
-  }, [activityId, queryClient]);
+  }, [activityId, getSocket, queryClient]);
 
   return {
     leaderboardQuery,
