@@ -5,6 +5,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import Header from "@/app/(main)/components/data-table/header";
 import { LeaderboardUser } from "../../types/leaderboard-user";
 import { Medal, Trophy } from "lucide-react";
+import getOrdinal from "@/app/(main)/utils/get-ordinal";
 
 const columns: ColumnDef<LeaderboardUser>[] = [
   {
@@ -15,15 +16,18 @@ const columns: ColumnDef<LeaderboardUser>[] = [
       const rank = leaderboardUser.rank;
 
       return (
-        <div className="ms-6">
+        <div className="ms-4">
           {rank <= 3 ? (
-            <div>
-              {rank === 1 && <Trophy className="h-5 w-5 text-yellow-500" />}
-              {rank === 2 && <Medal className="h-5 w-5 text-gray-400" />}
-              {rank === 3 && <Medal className="h-5 w-5 text-amber-700" />}
+            <div className="flex items-center gap-2">
+              <span>{getOrdinal(rank)}</span>
+              <span>
+                {rank === 1 && <Trophy className="h-5 w-5 text-yellow-500" />}
+                {rank === 2 && <Medal className="h-5 w-5 text-gray-400" />}
+                {rank === 3 && <Medal className="h-5 w-5 text-amber-700" />}
+              </span>
             </div>
           ) : (
-            <div className="ps-[6px]">{rank}</div>
+            <div>{getOrdinal(rank)}</div>
           )}
         </div>
       );
