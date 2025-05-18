@@ -38,7 +38,7 @@ const useLeaderboard = (activityId: string) => {
         handleLeaderboardUpdate
       );
     };
-  }, []);
+  }, [activityId, queryClient]);
 
   return {
     leaderboardQuery,
