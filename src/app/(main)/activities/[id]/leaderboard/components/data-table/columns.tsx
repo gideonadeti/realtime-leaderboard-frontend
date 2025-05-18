@@ -1,11 +1,11 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { Medal, Trophy } from "lucide-react";
 
 import Header from "@/app/(main)/components/data-table/header";
-import { LeaderboardUser } from "../../types/leaderboard-user";
-import { Medal, Trophy } from "lucide-react";
 import getOrdinal from "@/app/(main)/utils/get-ordinal";
+import { LeaderboardUser } from "../../types/leaderboard-user";
 
 const columns: ColumnDef<LeaderboardUser>[] = [
   {
