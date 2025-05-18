@@ -4,6 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import Header from "@/app/(main)/components/data-table/header";
 import { LeaderboardUser } from "../../types/leaderboard-user";
+import { Medal, Trophy } from "lucide-react";
 
 const columns: ColumnDef<LeaderboardUser>[] = [
   {
@@ -11,8 +12,21 @@ const columns: ColumnDef<LeaderboardUser>[] = [
     header: ({ column }) => <Header column={column} title="Rank" />,
     cell: ({ row }) => {
       const leaderboardUser = row.original as LeaderboardUser;
+      const rank = leaderboardUser.rank;
 
-      return <span className="ms-6">{leaderboardUser.rank}</span>;
+      return (
+        <div className="ms-6">
+          {rank <= 3 ? (
+            <div>
+              {rank === 1 && <Trophy className="h-5 w-5 text-yellow-500" />}
+              {rank === 2 && <Medal className="h-5 w-5 text-gray-400" />}
+              {rank === 3 && <Medal className="h-5 w-5 text-amber-700" />}
+            </div>
+          ) : (
+            <div className="ps-[6px]">{rank}</div>
+          )}
+        </div>
+      );
     },
   },
   {
