@@ -5,7 +5,7 @@ import { Medal, Trophy } from "lucide-react";
 
 import Header from "@/app/(main)/components/data-table/header";
 import getOrdinal from "@/app/(main)/utils/get-ordinal";
-import { LeaderboardUser } from "../../types/leaderboard-user";
+import { LeaderboardUser } from "../../../types/leaderboard-user";
 
 const columns: ColumnDef<LeaderboardUser>[] = [
   {

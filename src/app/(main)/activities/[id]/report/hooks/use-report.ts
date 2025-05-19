@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 import useGetAxios from "@/app/(main)/hooks/use-get-axios";
 import { fetchReport } from "../utils/query-functions";
-import { LeaderboardUser } from "../../leaderboard/types/leaderboard-user";
+import { LeaderboardUser } from "../../types/leaderboard-user";
 
 const useReport = (activityId: string, fromDate: Date, toDate: Date) => {
   const getAxios = useGetAxios();

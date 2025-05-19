@@ -7,7 +7,7 @@ import { Socket } from "socket.io-client";
 import useGetSocket from "@/app/(main)/hooks/use-get-socket";
 import useGetAxios from "@/app/(main)/hooks/use-get-axios";
 import { fetchLeaderboard } from "../utils/query-functions";
-import { LeaderboardUser } from "../types/leaderboard-user";
+import { LeaderboardUser } from "../../types/leaderboard-user";
 
 const useLeaderboard = (activityId: string) => {
   const getAxios = useGetAxios();

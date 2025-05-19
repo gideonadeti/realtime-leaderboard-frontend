@@ -16,7 +16,7 @@ import {
 
 import Pagination from "@/app/(main)/components/data-table/pagination";
 import Toolbar from "./toolbar";
-import { LeaderboardUser } from "../../types/leaderboard-user";
+import { LeaderboardUser } from "../../../types/leaderboard-user";
 import { cn } from "@/lib/utils";
 import {
   Table,
