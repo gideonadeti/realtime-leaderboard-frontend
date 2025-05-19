@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { ClipboardList, Globe } from "lucide-react";
+import { ClipboardList, Earth, Globe } from "lucide-react";
 
 import SubmitScore from "./dialogs/submit-score";
 import { Button } from "@/components/ui/button";
@@ -34,6 +34,11 @@ const menuItems: MenuItem[] = [
     href: "/activities/global/leaderboard",
     icon: <Globe />,
     label: "Global Leaderboard",
+  },
+  {
+    href: "/activities/global/report",
+    icon: <Earth />,
+    label: "Global Report",
   },
 ];
 
