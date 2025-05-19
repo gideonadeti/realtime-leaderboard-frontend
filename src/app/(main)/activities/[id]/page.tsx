@@ -7,7 +7,6 @@ import { toast } from "sonner";
 import useActivities from "../hooks/use-activities";
 import columns from "./components/data-tables/scores/columns";
 import ScoresTable from "./components/data-tables/scores/table";
-import CustomLink from "../../components/custom-link";
 import Loading from "@/app/loading";
 import { Button } from "@/components/ui/button";
 import { H3 } from "@/components/ui/typography";
@@ -47,9 +46,22 @@ const Page = () => {
       </Button>
       <div className="flex items-center justify-between">
         <H3>{`${activity?.name} Scores`}</H3>
-        <CustomLink href={`/activities/${activity?.id}/leaderboard`}>
-          Leaderboard
-        </CustomLink>
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            onClick={() =>
+              router.push(`/activities/${activity?.id}/leaderboard`)
+            }
+          >
+            Leaderboard
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => router.push(`/activities/${activity?.id}/report`)}
+          >
+            Report
+          </Button>
+        </div>
       </div>
       <ScoresTable columns={columns} data={activity?.scores || []} />
     </div>
