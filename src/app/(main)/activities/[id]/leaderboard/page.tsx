@@ -6,8 +6,8 @@ import { toast } from "sonner";
 
 import useActivities from "../../hooks/use-activities";
 import useLeaderboard from "./hooks/use-leaderboard";
-import columns from "./components/data-table/columns";
-import LeaderboardTable from "./components/data-table/table";
+import columns from "../components/data-tables/leaderboard-report/columns";
+import LeaderboardTable from "../components/data-tables/leaderboard-report/table";
 import Loading from "@/app/loading";
 import { Button } from "@/components/ui/button";
 import { H3 } from "@/components/ui/typography";

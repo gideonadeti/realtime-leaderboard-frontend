@@ -5,8 +5,8 @@ import { useParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import useActivities from "../hooks/use-activities";
-import columns from "./components/data-table/columns";
-import ScoresTable from "./components/data-table/table";
+import columns from "./components/data-tables/scores/columns";
+import ScoresTable from "./components/data-tables/scores/table";
 import CustomLink from "../../components/custom-link";
 import Loading from "@/app/loading";
 import { Button } from "@/components/ui/button";

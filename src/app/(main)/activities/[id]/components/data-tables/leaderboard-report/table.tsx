@@ -27,15 +27,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-interface LeaderboardTableProps<TData, TValue> {
+interface LeaderboardReportTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-const LeaderboardTable = <TData, TValue>({
+const LeaderboardReportTable = <TData, TValue>({
   columns,
   data,
-}: LeaderboardTableProps<TData, TValue>) => {
+}: LeaderboardReportTableProps<TData, TValue>) => {
   const targetRowRef = useRef<HTMLTableRowElement>(null);
   const { user } = useUser();
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -145,4 +145,4 @@ const LeaderboardTable = <TData, TValue>({
   );
 };
 
-export default LeaderboardTable;
+export default LeaderboardReportTable;

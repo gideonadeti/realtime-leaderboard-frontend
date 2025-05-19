@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import Header from "@/app/(main)/components/data-table/header";
 import formatDate from "@/app/(main)/utils/format-date";
-import { Score } from "../../../types/activity";
+import { Score } from "../../../../types/activity";
 
 const columns: ColumnDef<Score>[] = [
   {

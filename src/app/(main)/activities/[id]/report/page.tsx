@@ -8,6 +8,8 @@ import { subDays, format, parseISO, isEqual } from "date-fns";
 
 import useActivities from "../../hooks/use-activities";
 import useReport from "./hooks/use-report";
+import columns from "../components/data-tables/leaderboard-report/columns";
+import ReportTable from "../components/data-tables/leaderboard-report/table";
 import Loading from "@/app/loading";
 import { Button } from "@/components/ui/button";
 import { H3, H5 } from "@/components/ui/typography";
@@ -74,9 +76,7 @@ const Page = () => {
 
       <div className="space-y-2">
         <H3>{`${activityName} Report`}</H3>
-        <H5>{`No. of users: ${users.length}`}</H5>
-        <p>{`From date: ${format(submittedRange.fromDate, "PPP")}`}</p>
-        <p>{`To date: ${format(submittedRange.toDate, "PPP")}`}</p>
+        <ReportTable columns={columns} data={users} />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
