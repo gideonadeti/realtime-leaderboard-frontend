@@ -14,9 +14,11 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
+  SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import useActivities from "../activities/hooks/use-activities";
 
 interface MenuItem {
   href: string;
@@ -45,6 +47,8 @@ const menuItems: MenuItem[] = [
 const AppSidebar = () => {
   const pathname = usePathname();
   const [openSubmitScore, setOpenSubmitScore] = useState(false);
+  const { activitiesQuery } = useActivities();
+  const activities = activitiesQuery.data || [];
 
   return (
     <Sidebar>
@@ -60,6 +64,9 @@ const AppSidebar = () => {
                       <span>{item.label}</span>
                     </Link>
                   </SidebarMenuButton>
+                  <SidebarMenuBadge>
+                    {activities.length > 99 ? "99+" : activities.length}
+                  </SidebarMenuBadge>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
