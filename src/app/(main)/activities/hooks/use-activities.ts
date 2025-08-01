@@ -22,7 +22,11 @@ const useActivities = () => {
   useEffect(() => {
     if (activitiesQuery.isError) {
       console.error("Error from `useActivities`:", activitiesQuery.error);
-      toast.error("Failed to fetch activities");
+
+      // Add id to prevent duplicate toasts when triggered multiple times
+      toast.error("Failed to fetch activities", {
+        id: "fetch-activities-error",
+      });
     }
   }, [activitiesQuery.isError, activitiesQuery.error]);
 
