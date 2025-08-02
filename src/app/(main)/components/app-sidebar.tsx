@@ -64,9 +64,11 @@ const AppSidebar = () => {
                       <span>{item.label}</span>
                     </Link>
                   </SidebarMenuButton>
-                  <SidebarMenuBadge>
-                    {activities.length > 99 ? "99+" : activities.length}
-                  </SidebarMenuBadge>
+                  {item.href === "/activities" && (
+                    <SidebarMenuBadge>
+                      {activities.length > 99 ? "99+" : activities.length}
+                    </SidebarMenuBadge>
+                  )}
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
