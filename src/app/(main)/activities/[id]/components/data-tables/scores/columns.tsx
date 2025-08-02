@@ -33,7 +33,7 @@ const columns: ColumnDef<Score>[] = [
     cell: ({ row }) => {
       const score = row.original as Score;
 
-      return <span>{formatDate(score.createdAt)}</span>;
+      return <span className="ms-4">{formatDate(score.createdAt)}</span>;
     },
   },
 ];
