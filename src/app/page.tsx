@@ -7,7 +7,7 @@ const Page = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.push("/activities");
+    router.push("/game-count");
   }, [router]);
 
   return null;
