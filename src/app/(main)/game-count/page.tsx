@@ -1,3 +1,5 @@
+"use client";
+
 import useLeaderboards from "../hooks/use-leaderboards";
 
 const Page = () => {
