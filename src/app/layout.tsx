@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ClerkProvider, SignIn, SignedIn, SignedOut } from "@clerk/nextjs";
 
 import "./globals.css";
 import { ThemeProvider } from "./(main)/components/theme-provider";
@@ -33,17 +32,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           enableSystem
           disableTransitionOnChange
         >
-          <ClerkProvider>
-            <SignedIn>
-              {children}
-              <Toaster richColors />
-            </SignedIn>
-            <SignedOut>
-              <div className="h-screen flex items-center justify-center">
-                <SignIn />
-              </div>
-            </SignedOut>
-          </ClerkProvider>
+          {children}
+          <Toaster richColors />
         </ThemeProvider>
       </body>
     </html>
