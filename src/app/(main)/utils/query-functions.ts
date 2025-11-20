@@ -1,18 +1,21 @@
-import { AxiosInstance } from "axios";
+import axiosInstance from "../libs/axios-instance";
 
-export const createScore = async (
-  axios: AxiosInstance,
-  activityId: string,
-  value: number
-) => {
+export const fetchBestDurationLeaderboard = async () => {
   try {
-    const response = await axios.post("/scores", {
-      activityId,
-      value,
-    });
+    const response = await axiosInstance.get(`/leaderboard/duration`);
 
     return response.data;
   } catch (error) {
-    console.error("Error from `createScore`:", error);
+    console.error("Error from `fetchBestDurationLeaderboard`:", error);
+  }
+};
+
+export const fetchMostGamesLeaderboard = async () => {
+  try {
+    const response = await axiosInstance.get(`/leaderboard/games-played`);
+
+    return response.data;
+  } catch (error) {
+    console.error("Error from `fetchMostGamesLeaderboard`:", error);
   }
 };
