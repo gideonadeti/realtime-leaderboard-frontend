@@ -4,7 +4,7 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import useActivities from "../../activities/hooks/use-activities";
-import useScores from "../../hooks/use-scores";
+import useScores from "../../hookss/use-scores";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Input } from "@/components/ui/input";
