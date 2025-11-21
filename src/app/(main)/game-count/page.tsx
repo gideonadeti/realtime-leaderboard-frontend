@@ -16,7 +16,7 @@ const Page = () => {
       <ul>
         {mostGamesLeaderboard.map((player) => (
           <li key={player.id}>
-            {player.username} - {player.rank} - {player.duration}
+            {player.username} - {player.rank} - {player.gamesCount}
           </li>
         ))}
       </ul>
